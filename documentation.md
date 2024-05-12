@@ -10,6 +10,8 @@ git add .
 git commit -m "Initial commit"
 git push --set-upstream origin main
 
+set up new repository via AWS Amplify
+
 ```
 
 ## Add linter rules

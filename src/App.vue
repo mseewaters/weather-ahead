@@ -1,30 +1,67 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <header>
+    <nav>
+      <ul>
+        <li class="nav-item">
+          <router-link class="nav-link" :to="{name:'home'}">
+            <img class="logo" src="./assets/logo-final-inverted.png" alt="logo" />
+            Empowering your outdoor plans.
+          </router-link>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <router-view/>
+  </main>
 </template>
 
 <style>
+
+@import './assets/variables.css';
+
+html, body {
+  font-family: 'Roboto', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  color: var(--dkblue);
+  background: var(--ltgreen);
 }
 
-nav {
-  padding: 30px;
+main {
+  width: 100%;
+  min-height: 300px;
 }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+/* Complete for header on all pages, retains fixed height for all resizing */
+header {
+  background-color: var(--medblue2);
+  width: 100%;
+  height: var(--fixedheight);
+  color: var(--ltyellow);
+}
+ul {
+  padding: 2px 10px;
+  display: flex;
+}
+.nav-item {
+  display: inline-block;
+  padding: 5px 40px 5px 5px;;
+  font-size: 1.5em;
+  border-right: 1px solid var(--ltblue);
+}
+.nav-link {
+  text-decoration: none;
+  color: inherit;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+.logo {
+  vertical-align: middle;
+  width: 50px;
+  margin-right: 20px;
 }
+
 </style>

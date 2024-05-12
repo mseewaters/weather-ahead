@@ -1,0 +1,17 @@
+/* variables.css */
+:root {
+    --ltblue: #cbe6fc;
+    --ltblue2: #b8dbe9;
+    --medblue: #1386b6;
+    --medblue2: #09567d;
+    --dkblue:  #022b45;
+    --ltgreen: #bbe3d3;
+    --medgreen: #1ca06c;
+    --dkgreen: #14704c;
+    --bluegreen: #24b8c3;
+    --yellow: #fafccb;
+    --ltyellow: #fefef5;
+  
+    --fixedheight: 60px;
+  }
+  
