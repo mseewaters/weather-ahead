@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/home/HomePage.vue'
 import RegisterForm from '@/home/RegisterForm.vue'
 import VerifyForm from '@/home/VerifyForm.vue'
+import UserProfile from '@/customize/userProfile.vue'
 
 const routes = [
   {
@@ -18,6 +19,11 @@ const routes = [
     path: '/verify',
     name: 'verify',
     component: VerifyForm
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: UserProfile
   }
 ]
 

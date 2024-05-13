@@ -10,18 +10,18 @@
     <div class="right-side" >
         <div>
             <div class="top-section">
-                <form id="signinForm">
+                <form @submit.prevent="signIn">
                     <h3>Log in to customize notifications</h3>
                     <div class="form-group">
                         <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" placeholder="Enter your email" pattern=".*" required>
+                        <input v-model="email" type="email" placeholder="Enter your email" pattern=".*" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Password: </label>
-                        <input type="password" id="password" name="password" placeholder="Enter your password" pattern=".*" required>
+                        <input v-model="password" type="password" placeholder="Enter your password" pattern=".*" required>
                     </div>
                     <div>
-                      <button type="submit" id="loginButton">Log in</button>
+                      <button type="submit" id="loginButton">Sign in</button>
                     </div>
                 </form>
                 <p>Don't have an account?   <router-link to="/register">Sign up</router-link></p>
@@ -37,7 +37,50 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { AuthenticationDetails, CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
+import cognitoConfig from '@/cognito-config.js';
+import { toUsername } from '@/utils/shared.js';
 
+const router = useRouter();
+
+const email = ref('');
+const password = ref('');
+
+// Function to handle user sign-in
+const signIn = async () => {
+  const authenticationData = {
+    Username: toUsername(email.value),
+    Password: password.value
+  };
+  const authenticationDetails = new AuthenticationDetails(authenticationData);
+
+  const userPool = new CognitoUserPool({
+    UserPoolId: cognitoConfig.userPoolId,
+    ClientId: cognitoConfig.clientId
+  });
+
+  const userData = {
+    Username: toUsername(email.value),
+    Pool: userPool
+  };
+
+  const cognitoUser = new CognitoUser(userData);
+
+  cognitoUser.authenticateUser(authenticationDetails, {
+    onSuccess: (result) => {
+      console.log('access token + ' + result.getAccessToken().getJwtToken());
+      alert("Sign in successful!");
+      router.push('/profile');
+      sessionStorage.setItem('token', result.getIdToken().getJwtToken());
+    },
+    onFailure: (err) => {
+      console.error('Error:', err.message || JSON.stringify(err));
+      alert("Failed to sign in: " + err.message);
+    }
+  });
+};
 
 </script>
 

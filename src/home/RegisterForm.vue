@@ -9,22 +9,22 @@
         <div class="right-side2">
             <h1>Register to create custom notifications</h1>
 
-            <form id="registrationForm">
+            <form @submit.prevent="register">
                 <div class="form-group">
                     <label for="name">Name:</label>
-                    <input type="text" id="nickname" name="nickname" placeholder="Enter your name" pattern=".*" required>
+                    <input v-model="nickname" type="text"  placeholder="Enter your name" pattern=".*" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" pattern=".*" required>
+                    <input v-model="email" type="email" placeholder="Enter your email" pattern=".*" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password: Minimum 8 Characters.  Must contain:  1 Number, 1 Special character, 1 Uppercase letter, 1 Lowercase letter</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" pattern=".*" required>
+                    <input v-model="password" type="password" placeholder="Enter your password" pattern=".*" required>
                 </div>
                 <div class="form-group">
                     <label for="confirm-password">Confirm Password:</label>
-                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" pattern=".*" required>
+                    <input v-model="confirmPassword" type="password" placeholder="Confirm your password" pattern=".*" required>
                 </div>
                 <br>
                 <button type="submit">Submit registration</button>
@@ -34,6 +34,49 @@
         </div>
     </div>  
 </template>
+
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { CognitoUserPool, CognitoUserAttribute } from 'amazon-cognito-identity-js';
+import cognitoConfig from '@/cognito-config.js';
+import { toUsername } from '@/utils/shared.js';
+
+const router = useRouter();
+const userPool = new CognitoUserPool({
+  UserPoolId: cognitoConfig.userPoolId,
+  ClientId: cognitoConfig.clientId
+});
+
+const password = ref('');
+const confirmPassword = ref('');
+const email = ref('');
+const nickname = ref('');
+
+
+const register = async () => {
+
+    if (password.value !== confirmPassword.value) {
+    alert("Passwords do not match.");
+    return;
+    }    
+
+    const attributeList = [
+    new CognitoUserAttribute({ Name: 'email', Value: email.value }),
+    new CognitoUserAttribute({ Name: 'nickname', Value: nickname.value })
+    ];
+
+    userPool.signUp(toUsername(email.value), password.value, attributeList, null, (err, result) => {
+        if (err) {
+        console.error(err.message || JSON.stringify(err));
+        return;
+        }
+        const cognitoUser = result.user;
+        console.log('user name is ' + cognitoUser.getUsername());
+        router.push('/verify'); // Redirect to verification page
+    });
+};
+</script>
 
 <style scoped>
 .container {
