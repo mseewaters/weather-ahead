@@ -71,9 +71,11 @@ const signIn = async () => {
   cognitoUser.authenticateUser(authenticationDetails, {
     onSuccess: (result) => {
       console.log('access token + ' + result.getAccessToken().getJwtToken());
+      console.log('id token + ' + result.getIdToken().getJwtToken());
       alert("Sign in successful!");
       router.push('/profile');
       sessionStorage.setItem('token', result.getIdToken().getJwtToken());
+      sessionStorage.setItem('username', toUsername(email.value));
     },
     onFailure: (err) => {
       console.error('Error:', err.message || JSON.stringify(err));
