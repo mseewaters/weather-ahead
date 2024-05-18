@@ -10,6 +10,7 @@ const userPool = new CognitoUserPool({
 
 export function checkUserSession() {
     const cognitoUser = userPool.getCurrentUser();
+    console.log(cognitoUser);
     if (cognitoUser != null) {
         cognitoUser.getSession((err, session) => {
         if (err) {

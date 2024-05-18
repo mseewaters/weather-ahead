@@ -57,7 +57,13 @@
         <div class="centered-image">
             <img src="../assets/logo-final-removebg.png" alt="Logo" width=50% height=auto>
         </div>
+        <div>
+          <img src="../assets/cold-temperature.png" alt="Cold" width=10% height=auto>
+          <img src="../assets/running.png" alt="Running" width=10% height=auto>
+          <p><a href="https://iconscout.com/icons/running" class="text-underline font-size-sm" target="_blank">running </a> by maninderkaur on IconScout</p>
+        </div>
       </div>
+
     </div>
   </template>
   
