@@ -2,11 +2,11 @@
   <header>
     <nav>
       <ul>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{name:'home'}">
+        <li class="nav-item" >
+          <div class="nav-link" @click="handleRouteLinkClick">
             <img class="logo" src="./assets/logo-final-inverted.png" alt="logo" />
             Empowering your outdoor plans.
-          </router-link>
+          </div>
         </li>
       </ul>
     </nav>
@@ -15,6 +15,26 @@
     <router-view/>
   </main>
 </template>
+
+<script setup>
+import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import isAuthenticated, { checkUserSession } from '@/utils/authService'; // adjust the path as needed
+
+const router = useRouter();
+
+onMounted(checkUserSession);
+
+function handleRouteLinkClick() {
+    checkUserSession();
+    console.log("check session", isAuthenticated.value)
+    // After update, navigate based on authentication status
+    const routeTo = isAuthenticated.value ? '/profile' : '/home';
+    router.push(routeTo);
+}
+
+</script>
+
 
 <style>
 
@@ -51,11 +71,12 @@ ul {
   display: inline-block;
   padding: 5px 40px 5px 5px;;
   font-size: 1.5em;
-  border-right: 1px solid var(--ltblue);
+  /* border-right: 1px solid var(--ltblue); */
 }
 .nav-link {
   text-decoration: none;
   color: inherit;
+  cursor: pointer; /* Shows a pointer cursor on hover */
 }
 
 .logo {
@@ -63,5 +84,6 @@ ul {
   width: 50px;
   margin-right: 20px;
 }
+
 
 </style>

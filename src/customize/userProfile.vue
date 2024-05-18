@@ -17,10 +17,6 @@
               <label for="city" class="fixed-label">City:</label>
               <input type="text" id="city" v-model="settings.city">
             </div>
-            <!-- <div class="form-group">
-              <label for="country" class="fixed-label">Country:</label>
-              <input type="text" id="country" v-model="settings.country">
-            </div> -->
             <div class="country-selector">
               <label for="country-dropdown" class="fixed-label">Country:</label>
               <select id="country-dropdown" v-model="settings.country" class="country-dropdown">
@@ -30,6 +26,7 @@
                 </option>
               </select>
             </div>
+            <br>
             <h4>Select days to receive notifications</h4>
             <div>
               <label v-for="day in daysOfWeek" :key="day" class="checkbox-container">
@@ -37,6 +34,7 @@
                 {{ day }}
               </label>
             </div>
+            <br>
             <br>
             <button type="submit">Update profile</button>
           </form>
@@ -47,6 +45,7 @@
             <p>{{ settings.location }}</P>
           </div>
         </div>
+        <br>
         <div>
           <h3>JWT Token</h3>
           <textarea readonly :value="jwtToken" rows="10" cols="50"></textarea>
@@ -259,7 +258,7 @@
 
   button {
       display: block;
-      width: 60%; 
+      width: 80%; 
       padding: 5px;
       background-color: var(--dkgreen); /* Blue background */
       color: white;
@@ -338,7 +337,5 @@
     font-size: 1.0rem;
   }
 
-  .country-dropdown:focus {
-    border-color: transparent;
-  }
+  
   </style>

@@ -24,8 +24,11 @@
                       <button type="submit" id="loginButton">Sign in</button>
                     </div>
                 </form>
-                <p>Don't have an account?   <router-link to="/register">Sign up</router-link></p>
-                <p>Need to verify an account   <router-link to="/verify">Verify</router-link></p>
+                <div> 
+                  <br>
+                  <p><router-link to="/register" style="color:var(--dkgreen); font-weight: bold;">Sign up</router-link> to create an account</p>
+                  <p><router-link to="/verify" style="color:var(--dkgreen); font-weight: bold;">Verify</router-link> an account with email code</p>
+                </div>
                 <br>
             </div>
             <div class="bottom-section" style="text-align: center;">
