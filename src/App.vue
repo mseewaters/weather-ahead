@@ -29,7 +29,7 @@ function handleRouteLinkClick() {
     checkUserSession();
     console.log("check session", isAuthenticated.value)
     // After update, navigate based on authentication status
-    const routeTo = isAuthenticated.value ? '/profile' : '/home';
+    const routeTo = isAuthenticated.value ? '/' : '/';
     router.push(routeTo);
 }
 
