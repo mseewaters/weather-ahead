@@ -104,4 +104,4 @@ const resetPassword = () => {
 <style scoped>
 
 
-</style>
+</style> 
