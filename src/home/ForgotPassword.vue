@@ -20,7 +20,13 @@
                 </div>
                 <div class="form-group">
                     <label for="newPassword">New Password:</label>
-                    <input type="password" id="newPassword" v-model="newPassword" required>
+                    <input :type="isPasswordVisible ? 'text' : 'password'" id="newPassword" v-model="newPassword" required>
+                </div>
+                <div>
+                    <label for="show-password-checkbox">
+                        <input type="checkbox" id="show-password-checkbox" v-model="isPasswordVisible">
+                        Show Passwords
+                    </label>
                 </div>
                 <button type="submit">Reset Password</button>
             </form>
@@ -41,6 +47,7 @@ const email = ref('');
 const code = ref('');
 const newPassword = ref('');
 const codeSent = ref(false);
+const isPasswordVisible = ref(false);
 
 const userPool = new CognitoUserPool({
     UserPoolId: cognitoConfig.userPoolId,
@@ -80,16 +87,16 @@ const resetPassword = () => {
     };
 
     const cognitoUser = new CognitoUser(userData);
-   cognitoUser.confirmPassword(code.value, newPassword.value, {
-    onSuccess() {
-        console.log('Password changed successfully');
-        alert('Password has been changed successfully!');
-        router.push('/'); // Redirect to verification page
-    },
-    onFailure(err) {
-        alert(err.message || JSON.stringify(err));
-    }
-    });
+    cognitoUser.confirmPassword(code.value, newPassword.value, {
+        onSuccess() {
+            console.log('Password changed successfully');
+            alert('Password has been changed successfully!');
+            router.push('/'); // Redirect to verification page
+        },
+        onFailure(err) {
+            alert(err.message || JSON.stringify(err));
+        }
+        });
 };
 
 </script>
