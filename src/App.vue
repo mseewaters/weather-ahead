@@ -8,6 +8,11 @@
             Empowering your outdoor plans.
           </div>
         </li>
+        <li class="nav-item" style="margin-left: auto;">
+          <div class="nav-link" @click="handleSignOut">
+            <span>Sign Out</span>
+          </div>
+        </li>
       </ul>
     </nav>
   </header>
@@ -17,28 +22,28 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import isAuthenticated, { checkUserSession } from '@/utils/authService'; // adjust the path as needed
+import { isTokenValid, signOut } from '@/utils/authService'
 
 const router = useRouter();
 
-onMounted(checkUserSession);
-
 function handleRouteLinkClick() {
-    checkUserSession();
-    console.log("check session", isAuthenticated.value)
-    // After update, navigate based on authentication status
-    const routeTo = isAuthenticated.value ? '/' : '/';
-    router.push(routeTo);
+  const isAuthenticated = isTokenValid();
+  console.log("check session", isAuthenticated)
+  // After update, navigate based on authentication status
+  const routeTo = isAuthenticated.value ? '/' : '/profile';
+  router.push(routeTo);
+}
+
+function handleSignOut() {
+  signOut();
+  router.push('/');
 }
 
 </script>
 
 
 <style>
-
-@import './assets/variables.css';
 
 html, body {
   font-family: 'Roboto', Arial, sans-serif;
@@ -62,21 +67,14 @@ header {
   width: 100%;
   height: var(--fixedheight);
   color: var(--ltyellow);
+  box-sizing: border-box;
 }
 ul {
-  padding: 2px 10px;
+  padding: 0px;
+  margin: 0;
+  list-style: none;
   display: flex;
-}
-.nav-item {
-  display: inline-block;
-  padding: 5px 40px 5px 5px;;
-  font-size: 1.5em;
-  /* border-right: 1px solid var(--ltblue); */
-}
-.nav-link {
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer; /* Shows a pointer cursor on hover */
+  align-items: center;
 }
 
 .logo {

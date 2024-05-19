@@ -1,0 +1,70 @@
+.nav-item {
+display: inline-block;
+padding: 5px 30px 5px 5px;
+font-size: 1.5em;
+/* border-right: 1px solid var(--ltblue); */
+}
+
+.nav-link {
+text-decoration: none;
+color: inherit;
+cursor: pointer; /* Shows a pointer cursor on hover */
+}
+
+form {
+    padding: 0px 50px 0px 0px;
+    width: 95%; /* Fixed width */
+}
+
+.form-group {
+    margin-bottom: 30px; /* Space between form fields */
+}
+
+label {
+    display: block; /* Ensures the label is on its own line */
+    margin-bottom: 3px; /* Small space between label and input field */
+    color: var(--dkblue);
+    font-size: 0.8rem; /* Smaller font size for labels */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%; /* Makes input fields take up the full container width */
+    padding: 4px;
+    border: none; /* Removes all borders */
+    border-bottom: 2px solid var(--dkblue); /* Only bottom border */
+    background-color: transparent; /* Ensures no background color */
+    outline: none; /* Removes the outline on focus */
+    color: var(--dkblue);
+    font-size: 1.0rem; /* Adjusts font size of input text */
+}
+
+/* Styling placeholders */
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+    color: var(--medblue); /* Light grey color for placeholder */
+    font-size: 1.2rem; /* Adjusts font size of placeholder */
+    font-style: italic;
+
+}
+
+button {
+    display: block;
+    width: 60%; 
+    padding: 5px;
+    background-color: var(--dkgreen); /* Blue background */
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: var(--dkblue);
+    border-radius: 15px;
+    cursor: pointer; /* Pointer cursor on hover */
+    margin: 0 auto; /* Center horizontally */
+
+}
+
+button:hover {
+    background-color: var(--dkblue); /* Darker blue on hover */
+}

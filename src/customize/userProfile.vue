@@ -73,6 +73,10 @@
 
   const userProfile = ref({})
   //const error = ref('')
+  const retrySettings = {
+    retryDelay: 2000,  // Initial delay for retries in milliseconds
+    retryCount: 0     // Initial retry counter
+  };
   const settings = ref({
     enableNotifications: false,
     city: '',
@@ -113,30 +117,47 @@
   const baseApiUrl = 'https://122jfj0o5h.execute-api.us-east-1.amazonaws.com/prod/user'
   const jwtToken = sessionStorage.getItem('token');
 
-    const fetchUserProfile = async () => {
-      try {
-        const username = sessionStorage.getItem('username');
-        
+  const fetchUserProfile = async () => {
+    try {
+      const username = sessionStorage.getItem('username');
+      
+      
 
-        const response = await axios.get(`${baseApiUrl}?username=${username}`, {
-          headers: { Authorization: `Bearer ${jwtToken}` }
-        });
+      const response = await axios.get(`${baseApiUrl}?username=${username}`, {
+        headers: { Authorization: `Bearer ${jwtToken}` }
+      });
 
-        userProfile.value = response.data
-        console.log(userProfile.value)
+      userProfile.value = response.data
+      console.log(userProfile.value)
 
-        if (response.data) {
-          settings.value.enableNotifications = response.data.enableNotifications || false;
-          settings.value.city = response.data.locationInfo.city|| '';
-          settings.value.country = response.data.locationInfo.country|| '';
-          settings.value.location = response.data.locationInfo.locationName|| '';
-          selectedDays.value = response.data.dayOfWeek|| '';
+      if (response.data) {
+        retrySettings.retryCount = 0;
+        settings.value.enableNotifications = response.data.enableNotifications || false;
+        settings.value.city = response.data.locationInfo?.city|| '';
+        settings.value.country = response.data.locationInfo?.country|| '';
+        settings.value.location = response.data.locationInfo?.locationName|| '';
+        selectedDays.value = response.data.dayOfWeek|| '';
+      } else {
+          if (retrySettings.retryCount < 5) {
+            retrySettings.retryCount++;
+            setTimeout(fetchUserProfile, retrySettings.retryDelay);
+            retrySettings.retryDelay += 1000;  // Increment delay for the next retry
+          } else {
+              alert('Please check your network connection or try again later.');
+          }
+      }
+      } catch (error) {
+        console.error('Failed to fetch user profile:', error);
+        alert('Failed to load user settings.');
+        // Optional: Increment a retry counter and stop retrying after a maximum number of attempts
+        if (retrySettings.retryCount < 5) {
+          retrySettings.retryCount++;
+            setTimeout(fetchUserProfile, retrySettings.retryDelay);
+        } else {
+            alert('Please check your network connection or try again later.');
         }
-        } catch (error) {
-          console.error('Failed to fetch user profile:', error);
-          alert('Failed to load user settings.');
-        }
-      };
+      }
+    };
 
   const submitForm = async () => {
     if (settings.value.enableNotifications && (!settings.value.city || settings.value.city.trim() === '')) {

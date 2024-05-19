@@ -1,0 +1,12 @@
+/* From home page, original signin right side */
+
+.top-section {
+    flex: 0 0 25%; /* Takes up 25% of the vertical space */
+    justify-content: flex-start;
+}
+
+.bottom-section {
+    flex: 1; /* Takes the remaining 75% of the vertical space */
+    justify-content:center;
+    align-items: center;
+}
