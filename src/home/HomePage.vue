@@ -1,10 +1,12 @@
 <template>
   <div class="main-container">
     <div class="left-side">
-      <p>Personalized notifications </p>
-      <p>that keep you informed </p>
-      <p>of weather events</p>
-      <p>that impact <u>you</u>.</p>
+      <span style="font-size: 4vw; font-weight: bolder;">Personalized notifications that keep you informed of weather events that impact <u>you</u></span>
+      <div style="font-size: 2vw; font-weight: normal; text-align: left; line-height: 1.2; margin-left: 5vw">
+        <p>YOUR location</p>
+        <p>YOUR schedule</p>
+        <p>YOUR events <span style="color: red; font-weight: bold">[COMING SOON]</span></p>
+      </div>
     </div>
     <div class="vertical-line"></div>
     <div class="right-side" >
@@ -51,11 +53,9 @@
 .left-side {
     flex: 1; /* Takes remaining space */
     background-color: var(--ltblue2); /* Just for visualization */
-    padding: 0px 0px; /* Optional: Add some padding */
+    padding: 0px 50px; /* Optional: Add some padding */
     text-align: center;
-    line-height: 0.4;   
-    font-size: 64px; 
-    font-weight: 700; 
+    line-height: 2;   
     font-style: italic;
     box-sizing: border-box;
 }
