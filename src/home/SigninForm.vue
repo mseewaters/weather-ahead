@@ -56,6 +56,24 @@ const signIn = async () => {
 
   const cognitoUser = new CognitoUser(userData);
 
+  const getUserId = (cognitoUser) => {
+  cognitoUser.getUserAttributes((err, attributes) => {
+    if (err) {
+      console.error('Attributes error:', err);
+      return;
+    }
+
+    const userIdAttribute = attributes.find(attr => attr.Name === 'custom:userId');
+    if (userIdAttribute) {
+      console.log('User ID is: ' + userIdAttribute.Value);
+      sessionStorage.setItem('userID', userIdAttribute.Value);
+      return userIdAttribute.Value;
+    } else {
+      console.log('User ID not found');
+    }
+  });
+};
+
   cognitoUser.authenticateUser(authenticationDetails, {
     onSuccess: (result) => {
       alert("Sign in successful!");
@@ -63,6 +81,7 @@ const signIn = async () => {
       sessionStorage.setItem('username', toUsername(email.value));
       sessionStorage.setItem('token_expiration', result.getIdToken().getExpiration() * 1000);
       console.log('user name is ' + cognitoUser.getUsername());
+      getUserId(cognitoUser);
       router.push('/profile');
     },
     onFailure: (err) => {

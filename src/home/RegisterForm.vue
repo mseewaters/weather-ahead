@@ -37,8 +37,10 @@ import { useRouter } from 'vue-router';
 import { CognitoUserPool, CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import cognitoConfig from '@/cognito-config.js';
 import { toUsername } from '@/utils/shared.js';
+import { v4 as uuidv4 } from 'uuid';
 
 const router = useRouter();
+const uuid = uuidv4();
 const userPool = new CognitoUserPool({
   UserPoolId: cognitoConfig.userPoolId,
   ClientId: cognitoConfig.clientId
@@ -60,7 +62,8 @@ const register = async () => {
 
     const attributeList = [
     new CognitoUserAttribute({ Name: 'email', Value: email.value }),
-    new CognitoUserAttribute({ Name: 'nickname', Value: nickname.value })
+    new CognitoUserAttribute({ Name: 'nickname', Value: nickname.value }),
+    new CognitoUserAttribute({ Name: 'custom:userId', Value: uuid })
     ];
 
     userPool.signUp(toUsername(email.value), password.value, attributeList, null, (err, result) => {
