@@ -1,4 +1,16 @@
 <template>
+  <header>
+    <nav>
+      <ul>
+        <li class="nav-item" >
+          <div class="nav-link" >
+              <img class="logo" src="@/assets/logo-final-inverted.png" alt="logo" />
+              <span style="text-decoration: none">Empowering your outdoor plans.</span>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
   <div class="main-container">
     <div class="left-side">
       <span style="font-size: 4vw; font-weight: bolder;">Personalized notifications that keep you informed of weather events that impact <u>you</u></span>
@@ -42,6 +54,27 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+header {
+  background-color: var(--medblue2);
+  width: 100%;
+  height: var(--fixedheight);
+  color: var(--ltyellow);
+  box-sizing: border-box;
+}
+ul {
+  padding: 0px;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  vertical-align: middle;
+  width: 50px;
+  margin-right: 20px;
+}
 
 .main-container {
     display: flex;
@@ -94,5 +127,19 @@ ul {
 
 .comp-item:not(:last-child) {
   border-right: 1px solid var(--medblue); /* Adjust the border style and color as needed */
+}
+
+.nav-item {
+  display: inline-block;
+  padding: 5px 30px 5px 5px;
+  font-size: 1.5em;
+  text-decoration: none;
+  /* border-right: 1px solid var(--ltblue); */
+}
+
+.nav-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer; /* Shows a pointer cursor on hover */
 }
 </style>

@@ -1,9 +1,30 @@
 <template>
+  <header>
+    <nav>
+      <ul>
+        <li class="nav-item" >
+          <div class="nav-link">
+            <img class="logo" src="@/assets/logo-final-inverted.png" alt="logo" />
+            Empowering your outdoor plans.
+          </div>
+        </li>
+        <li class="nav-item" style="margin-left: auto;">
+          <div class="nav-link" @click="handleSignOut">
+            <span>Sign Out</span>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
     <div class="container">
       <div class="left-side">
         <div>
           <h2>Welcome, {{ userProfile.name }}</h2>
           <h5>Add/modify your location and notification preferences</h5>
+          <h4 style="color: var(--dkgreen)" v-if="isLoading">Loading your data ...</h4>
+        </div>
+        <div v-if="!isLoading">
           <form @submit.prevent="submitForm">
             <div class="toggle-container">
               <label for="notificationToggle" class="toggle-label">Enable weather emails</label>
@@ -45,11 +66,11 @@
             <p>{{ settings.location }}</P>
           </div>
         </div>
-        <br>
+<!--         <br>
         <div>
           <h3>JWT Token</h3>
           <textarea readonly :value="jwtToken" rows="10" cols="50"></textarea>
-        </div>
+        </div> -->
       </div>
       <div class="vertical-line"></div>
       <div class="right-side2">
@@ -65,11 +86,24 @@
       </div>
 
     </div>
+    </main>
   </template>
   
   <script setup>
   import { ref, onMounted } from 'vue';
+  import { useRouter } from 'vue-router';
   import axios from 'axios';
+  import { signOut } from '@/utils/authService'
+  import '@/assets/global.css'
+
+  const router = useRouter();
+
+  function handleSignOut() {
+    signOut();
+    router.push('/');
+  }
+
+  const isLoading = ref(true);
 
   const userProfile = ref({})
   //const error = ref('')
@@ -119,11 +153,10 @@
 
   const fetchUserProfile = async () => {
     try {
-      const username = sessionStorage.getItem('username');
-      
-      
+      const userId = sessionStorage.getItem('userId');
+        
 
-      const response = await axios.get(`${baseApiUrl}?username=${username}`, {
+      const response = await axios.get(`${baseApiUrl}?userId=${userId}`, {
         headers: { Authorization: `Bearer ${jwtToken}` }
       });
 
@@ -137,6 +170,7 @@
         settings.value.country = response.data.locationInfo?.country|| '';
         settings.value.location = response.data.locationInfo?.locationName|| '';
         selectedDays.value = response.data.dayOfWeek|| '';
+        isLoading.value = false;
       } else {
           if (retrySettings.retryCount < 5) {
             retrySettings.retryCount++;
@@ -148,7 +182,7 @@
       }
       } catch (error) {
         console.error('Failed to fetch user profile:', error);
-        alert('Failed to load user settings.');
+        console.log("Retry count", retrySettings.retryCount)
         // Optional: Increment a retry counter and stop retrying after a maximum number of attempts
         if (retrySettings.retryCount < 5) {
           retrySettings.retryCount++;
@@ -161,12 +195,12 @@
 
   const submitForm = async () => {
     if (settings.value.enableNotifications && (!settings.value.city || settings.value.city.trim() === '')) {
-    alert("A postal code and country are required for notifications");
+    alert("A city and country are required for notifications");
     return;
     }
     try {
-      const username = sessionStorage.getItem('username');
-      const response = await axios.post(`${baseApiUrl}?username=${username}`, {
+      const userId = sessionStorage.getItem('userId');
+      const response = await axios.post(`${baseApiUrl}?userId=${userId}`, {
         enableNotifications: settings.value.enableNotifications,
         city: encodeURIComponent(settings.value.city),
         country: settings.value.country,
@@ -190,6 +224,27 @@
   </script>
   
   <style scoped>
+
+  header {
+    background-color: var(--medblue2);
+    width: 100%;
+    height: var(--fixedheight);
+    color: var(--ltyellow);
+    box-sizing: border-box;
+  }
+  ul {
+    padding: 0px;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    vertical-align: middle;
+    width: 50px;
+    margin-right: 20px;
+  }
   .toggle-container {
     display: flex;
     align-items: center; /* Aligns label and switch vertically */

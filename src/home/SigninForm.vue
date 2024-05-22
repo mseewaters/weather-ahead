@@ -66,7 +66,7 @@ const signIn = async () => {
     const userIdAttribute = attributes.find(attr => attr.Name === 'custom:userId');
     if (userIdAttribute) {
       console.log('User ID is: ' + userIdAttribute.Value);
-      sessionStorage.setItem('userID', userIdAttribute.Value);
+      sessionStorage.setItem('userId', userIdAttribute.Value);
       return userIdAttribute.Value;
     } else {
       console.log('User ID not found');
