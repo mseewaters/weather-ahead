@@ -1,16 +1,4 @@
 <template>
-  <header>
-    <nav>
-      <ul>
-        <li class="nav-item" >
-          <div class="nav-link" >
-              <img class="logo" src="@/assets/logo-final-inverted.png" alt="logo" />
-              <span style="text-decoration: none">Empowering your outdoor plans.</span>
-          </div>
-        </li>
-      </ul>
-    </nav>
-  </header>
   <div class="main-container">
     <div class="left-side">
       <span style="font-size: 4vw; font-weight: bolder;">Personalized notifications that keep you informed of weather events that impact <u>you</u></span>

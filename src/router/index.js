@@ -5,6 +5,8 @@ import VerifyForm from '@/home/VerifyForm.vue'
 import SigninForm from '@/home/SigninForm.vue'
 import UserProfile from '@/customize/userProfile.vue'
 import ForgotPassword from '@/home/ForgotPassword.vue'
+import dataPrivacy from '@/legal/dataPrivacy.vue'
+import termsConditions from '@/legal/termsConditions.vue'
 import { isTokenValid } from '@/utils/authService'
 
 const routes = [
@@ -41,6 +43,16 @@ const routes = [
     name: 'profile',
     component: UserProfile,
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/data',
+    name: 'data',
+    component: dataPrivacy
+  },
+  {
+    path: '/terms',
+    name: 'terms',
+    component: termsConditions
   }
 ]
 

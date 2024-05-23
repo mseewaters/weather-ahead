@@ -1,21 +1,4 @@
 <template>
-  <header>
-    <nav>
-      <ul>
-        <li class="nav-item" >
-          <div class="nav-link">
-            <img class="logo" src="@/assets/logo-final-inverted.png" alt="logo" />
-            Empowering your outdoor plans.
-          </div>
-        </li>
-        <li class="nav-item" style="margin-left: auto;">
-          <div class="nav-link" @click="handleSignOut">
-            <span>Sign Out</span>
-          </div>
-        </li>
-      </ul>
-    </nav>
-  </header>
   <main>
     <div class="container">
       <div class="left-side">
@@ -91,17 +74,8 @@
   
   <script setup>
   import { ref, onMounted } from 'vue';
-  import { useRouter } from 'vue-router';
   import axios from 'axios';
-  import { signOut } from '@/utils/authService'
   import '@/assets/global.css'
-
-  const router = useRouter();
-
-  function handleSignOut() {
-    signOut();
-    router.push('/');
-  }
 
   const isLoading = ref(true);
 
