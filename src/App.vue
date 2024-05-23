@@ -4,7 +4,7 @@
         <ul>
           <li class="nav-item" >
             <span>
-            <router-link to="/" class="nav-link">
+            <router-link :to="authPath" class="nav-link">
               <img class="logo" src="@/assets/logo-final-inverted.png" alt="logo" />
               Empowering your outdoor plans.
             </router-link>
@@ -17,7 +17,6 @@
           </li>
         </ul>
       </nav>
-      {{ isAuth }}
     </header>
   <main>
     <router-view/>
@@ -39,7 +38,7 @@ import { useRouter } from 'vue-router';
 import { signOut } from '@/utils/authService'
 
 const router = useRouter();
-const isToken = ref('');
+const isToken = ref();
 
 function handleSignOut() {
   signOut();
@@ -53,6 +52,10 @@ router.beforeEach((to, from, next) => {
 });
 
 const isAuth = computed(() => isToken.value !== null);
+
+const authPath = computed(() => {
+  return isAuth.value ? '/profile' : '/';
+});
 
 </script>
 
