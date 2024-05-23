@@ -28,6 +28,8 @@
         </form>
         <br>
         <h5>After registering, please check your email inbox or spam folder for your verification code. </h5>
+        <h6> By registering, you agree to our <router-link to="data" >Data Privacy</router-link> and 
+            <router-link to="terms">Terms and Conditions</router-link> </h6>
     </div>
 </template>
 

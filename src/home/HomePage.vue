@@ -26,7 +26,6 @@
           </nav>
           <router-view/> <!-- This will render the active child component -->
           <br>
-          <br>
           <div style="text-align: center;">
               <img src="../assets/logo-final-inverted.png" alt="Logo" width=50% height=auto>
           </div>
