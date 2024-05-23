@@ -23,6 +23,7 @@
   </main>
   <footer>
     <ul class="footer-list">
+        Weather Ahead! will never sell or share your data. TBH We don't even know how.   
         <li> 
           <router-link to="data" class="footer-link">Data Privacy</router-link>
           <router-link to="terms" class="footer-link">Terms and Conditions</router-link>
@@ -112,9 +113,9 @@ footer {
 .footer-list {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: baseline;
   list-style: none;
-  margin: 0;
+  margin-left: 10px;
   padding: 0;
   height: 100%;
 }
@@ -122,7 +123,7 @@ footer {
 .footer-link {
   color: var(--ltyellow);
   text-decoration: none;
-  margin: 0 50px; /* Add margin to space out the links */
+  margin-left: 150px; /* Add margin to space out the links */
 }
 
 .nav-item {

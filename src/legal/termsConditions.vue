@@ -1,5 +1,5 @@
 <template>
-
+<div class="policy">
 <h2><strong>Terms and Conditions</strong></h2>
 
 <p>Welcome to Weather Ahead!!</p>
@@ -92,5 +92,24 @@
 
 <p>As long as the website and the information and services on the website are provided free of charge, we will not be liable for any loss or damage of any nature.</p>
 
+</div>
     
 </template>
+
+<style scoped>
+
+ul {
+  padding: 0px;
+  margin: 25px;
+  list-style: none;
+  display: block;
+  align-items: center;
+}
+
+.policy {
+  padding: 20px;
+  line-height: 1.0;
+
+}
+
+</style>
