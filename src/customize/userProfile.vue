@@ -58,6 +58,8 @@
       <div class="vertical-line"></div>
       <div class="right-side2">
         <h2>Customized events coming soon</h2>
+        <p><b>Currently available standard events:</b> Freeze (min temp &lt; 33F), Running (max temp &gt; 50F, change of rain &lt; 75%)</p>
+        <p><b>Next standard events:</b>  Water plants, weekend outdoor grilling</p>
         <div class="centered-image">
             <img src="../assets/logo-final-removebg.png" alt="Logo" width=50% height=auto>
         </div>

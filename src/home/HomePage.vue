@@ -1,11 +1,16 @@
 <template>
   <div class="main-container">
     <div class="left-side">
-      <span style="font-size: 4vw; font-weight: bolder;">Personalized notifications that keep you informed of weather events that impact <u>you</u></span>
-      <div style="font-size: 2vw; font-weight: normal; text-align: left; line-height: 1.2; margin-left: 5vw">
+      <span style="font-size: 4vw; font-weight: bolder; line-height: 1.8;">Personalized notifications that keep you informed of weather events that impact <u>you</u></span>
+      <div style="font-size: 2vw; font-weight: normal; text-align: left; line-height: 1.0; margin-left: 5vw">
         <p>YOUR location</p>
-        <p>YOUR schedule</p>
-        <p>YOUR events <span style="color: red; font-weight: bold">[COMING SOON]</span></p>
+        <p>YOUR notification schedule</p>
+        <p>YOUR outdoor events </p>
+        <ul class="event-list">
+          <li><b>Currently available standard events:</b> Freeze (min temp &lt; 33F), Running (max temp &gt; 50F, change of rain &lt; 75%)</li>
+          <li><b>Upcoming standard events:</b>  Water plants, weekend outdoor grilling</li>
+          <li><span style="color: red; font-weight: bold">[COMING SOON]</span> Choose and customize your events</li>
+        </ul>
       </div>
     </div>
     <div class="vertical-line"></div>
@@ -49,12 +54,14 @@ header {
   color: var(--ltyellow);
   box-sizing: border-box;
 }
-ul {
-  padding: 0px;
-  margin: 0;
-  list-style: none;
-  display: flex;
-  align-items: center;
+
+.event-list {
+  display:block;
+  list-style: disc;
+  margin-left: 50px;
+  font-size: 1vw;
+  line-height: 2;
+
 }
 
 .logo {
@@ -92,13 +99,6 @@ ul {
     padding: 20px 30px; /* Optional: Add some padding */
     box-sizing: border-box;
     
-}
-
-ul {
-  display: flex; /* Enables Flexbox */
-  justify-content: space-between; /* Distributes space evenly between items */
-  padding: 0; /* Removes default padding */
-  list-style: none; /* Removes default list style */
 }
 
 .comp-item {
