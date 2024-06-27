@@ -7,8 +7,8 @@
         <p>YOUR notification schedule</p>
         <p>YOUR outdoor events </p>
         <ul class="event-list">
-          <li><b>Currently available standard events:</b> Freeze (min temp &lt; 33F), Running (max temp &gt; 50F, change of rain &lt; 75%)</li>
-          <li><b>Upcoming standard events:</b>  Water plants, weekend outdoor grilling</li>
+          <li><b>Currently available standard events:</b> Freeze (min temp &lt; 33F), Running (max temp &gt; 50F, change of rain &lt; 75%), [NEW] Water plants</li>
+          <li><b>Upcoming standard events:</b> Weekend outdoor grilling</li>
           <li><span style="color: red; font-weight: bold">[COMING SOON]</span> Choose and customize your events</li>
         </ul>
       </div>

@@ -17,6 +17,14 @@
               </label>
             </div>
             <br>
+            <div class="toggle-container">
+              <span class="toggle-label">Units</span>
+                <div :class="['slider2', { 'slider2-f': settings.isFahrenheit }]">
+                  <div class="option" @click="selectFahrenheit">°F</div>
+                  <div class="option" @click="selectCelsius">°C</div>
+                </div>
+            </div>
+            <br>
             <div class="form-group">
               <label for="city" class="fixed-label">City:</label>
               <input type="text" id="city" v-model="settings.city">
@@ -34,8 +42,8 @@
             <h4>Select days to receive notifications</h4>
             <div>
               <label v-for="day in daysOfWeek" :key="day" class="checkbox-container">
-                <input type="checkbox" v-model="selectedDays" :value="day">
-                {{ day }}
+                <input type="checkbox" v-model="selectedDays" :value="day" class="custom-checkbox">
+                <span class="checkbox-label">{{ day }}</span>
               </label>
             </div>
             <br>
@@ -58,15 +66,16 @@
       <div class="vertical-line"></div>
       <div class="right-side2">
         <h2>Customized events coming soon</h2>
-        <p><b>Currently available standard events:</b> Freeze (min temp &lt; 33F), Running (max temp &gt; 50F, change of rain &lt; 75%)</p>
-        <p><b>Next standard events:</b>  Water plants, weekend outdoor grilling</p>
+        <p><b>Currently available standard events:</b> Freeze (min temp &lt; 33F), Running (max temp &gt; 50F, change of rain &lt; 75%), [NEW] Water plants</p>
+        <p><b>Next standard events:</b>  Weekend outdoor grilling</p>
         <div class="centered-image">
-            <img src="../assets/logo-final-removebg.png" alt="Logo" width=50% height=auto>
+            <img src="../assets/logo-final-removebg.png" alt="Logo" width=40% height=auto>
         </div>
         <div>
-          <img src="../assets/cold-temperature.png" alt="Cold" width=10% height=auto>
-          <img src="../assets/running.png" alt="Running" width=10% height=auto>
-          <p><a href="https://iconscout.com/icons/running" class="text-underline font-size-sm" target="_blank">running </a> by maninderkaur on IconScout</p>
+          <img src="../assets/cold-temperature.png" alt="Cold" width=5% height=auto>
+          <img src="../assets/running.png" alt="Running" width=5% height=auto>
+          <img src="../assets/watering-can.png" alt="Watering" width=5% height=auto>
+          <p>Email icons provided by <a href="https://iconscout.com/icons/running" class="text-underline font-size-sm" target="_blank">IconScout</a></p>
         </div>
       </div>
 
@@ -89,12 +98,23 @@
   };
   const settings = ref({
     enableNotifications: false,
+    isFahrenheit: true,
     city: '',
     country:'',
     location: ''
   });
+
+  const selectFahrenheit = () => {
+    settings.value.isFahrenheit = true;
+  };
+  const selectCelsius = () => {
+    settings.value.isFahrenheit = false;
+  };
+
   const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const selectedDays = ref([]);
+  // const units = [{name:'°F',unitType:'imperial'},{name:'°C', unitType:'metric'}];
+  // const sliderLabel = computed(() => settings.value.units ? 'C' : 'F')
 
   const countries = [
   {name: 'United States', code: 'US' },
@@ -117,9 +137,10 @@
   {name: 'Pakistan', code: 'PK'}, 
   {name: 'Philippines', code: 'PH'}, 
   {name: 'Singapore', code: 'SG'}, 
-  {name: 'Thailand', code: 'TH'}, 
-  {name: 'United States', code: 'US'}, 
-  {name: 'South Africa', code: 'ZA'}
+  {name: 'South Africa', code: 'ZA'},
+  {name: 'Switzerland', code: 'CH'},
+  {name: 'Thailand', code: 'TH'},
+  {name: 'All other', code: 'XX'}
   // Add more countries
 ];
 
@@ -142,7 +163,8 @@
       if (response.data) {
         retrySettings.retryCount = 0;
         settings.value.enableNotifications = response.data.enableNotifications || false;
-        settings.value.city = response.data.locationInfo?.city|| '';
+        settings.value.isFahrenheit = response.data.isFahrenheit || false;
+        settings.value.city = response.data.locationInfo?.city || '';
         settings.value.country = response.data.locationInfo?.country|| '';
         settings.value.location = response.data.locationInfo?.locationName|| '';
         selectedDays.value = response.data.dayOfWeek|| '';
@@ -178,6 +200,7 @@
       const userId = sessionStorage.getItem('userId');
       const response = await axios.post(`${baseApiUrl}?userId=${userId}`, {
         enableNotifications: settings.value.enableNotifications,
+        isFahrenheit: settings.value.isFahrenheit,
         city: encodeURIComponent(settings.value.city),
         country: settings.value.country,
         days: selectedDays.value
@@ -201,47 +224,12 @@
   
   <style scoped>
 
-  header {
-    background-color: var(--medblue2);
-    width: 100%;
-    height: var(--fixedheight);
-    color: var(--ltyellow);
-    box-sizing: border-box;
-  }
-  ul {
-    padding: 0px;
-    margin: 0;
-    list-style: none;
-    display: flex;
-    align-items: center;
-  }
-
-  .logo {
-    vertical-align: middle;
-    width: 50px;
-    margin-right: 20px;
-  }
-  .toggle-container {
-    display: flex;
-    align-items: center; /* Aligns label and switch vertically */
-  }
-
-  .toggle-label {
-    margin-right: 25px; /* Adds space between the label and the switch */
-    font-weight: bold;
-  }
-
-  .checkbox-container {
-    display: block;
-    margin-bottom: 5px;
-    margin-left: 25px;
-  }
+  /* Containers */
   .container {
       display: flex;
       flex-direction: row;
       min-height: calc(100vh - var(--fixedheight) - 24px); /* 100% of viewport height */
   }
-
   .left-side {
     flex: 0 0 20%; /* 35% width */
     display: flex;
@@ -249,7 +237,6 @@
     background-color: var(--ltyellow); /* Just for visualization */
     padding: 10px;
   }
-
   .right-side2 {
     flex: 1; /* Takes remaining space */
     background-color: var(--ltblue2); /* Just for visualization */
@@ -267,76 +254,19 @@
     align-items: flex-start; /* Center vertically */
   }
 
-  form {
-    padding: 5px 20px;
-    width: 90%; /* Fixed width */
-  }
 
-  .form-group {
+  /* Enable notifications toggle */
+  .toggle-container {
     display: flex;
-    align-items: center; /* Center aligns items vertically */
-    margin-bottom: 30px; /* Space between form fields */
+    align-items: center; /* Aligns label and switch vertically */
   }
 
-  .label {
-    margin-right: 10px; /* Space between label and input */
-    color: var(--dkblue);
-    white-space: nowrap; /* Prevents label from wrapping */
-  }
-
-  .fixed-label {
-    width: 100px;
-    font-size: 1.0rem;
+  .toggle-label {
+    margin-right: 25px; /* Adds space between the label and the switch */
     font-weight: bold;
+    font-size: 1.0rem;
     text-align: left;
   }
-
-  input[type="text"],
-  input[type="email"],
-  input[type="password"] {
-      flex-grow: 1;
-      padding: 4px;
-      border: none; /* Removes all borders */
-      border-bottom: 2px solid var(--dkblue); /* Only bottom border */
-      background-color: transparent; /* Ensures no background color */
-      outline: none; /* Removes the outline on focus */
-      color: var(--dkblue);
-      font-size: 1.0rem; /* Adjusts font size of input text */
-  }
-
-  /* Styling placeholders */
-  input[type="text"]::placeholder,
-  input[type="email"]::placeholder,
-  input[type="password"]::placeholder {
-      color: var(--medblue); /* Light grey color for placeholder */
-      font-size: 1.0rem; /* Adjusts font size of placeholder */
-      font-style: italic;
-
-  }
-
-  button {
-      display: block;
-      width: 80%; 
-      padding: 5px;
-      background-color: var(--dkgreen); /* Blue background */
-      color: white;
-      font-size: 1.2rem;
-      font-weight: bold;
-      border: var(--dkblue);
-      border-radius: 15px;
-      cursor: pointer; /* Pointer cursor on hover */
-      margin: 0 auto; /* Center horizontally */
-
-  }
-
-  button:hover {
-      background-color: var(--dkblue); /* Darker blue on hover */
-  }
-  textarea {
-    width: 100%;
-    margin-top: 20px;
-  }
-
   .switch {
     position: relative;
     display: inline-block;
@@ -356,7 +286,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: #eee;
     transition: .4s;
     border-radius: 24px; /* Fully rounded edges */
   }
@@ -367,7 +297,7 @@
     width: 20px;
     left: 2px;
     bottom: 2px;
-    background-color: white;
+    background-color: var(--ltyellow);
     transition: .4s;
     border-radius: 50%; /* Circle shape */
   }
@@ -380,6 +310,70 @@
   input:checked + .slider:before {
     transform: translateX(26px);
   }
+
+  /* Toggle button for units with label in button */
+  
+  .slider2 {
+    display: flex;
+    width: 80px;
+    border: 1px solid var(--ltblue);
+    border-radius: 25px;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: #eee;
+  }
+  
+  .slider2-f .option:first-child {
+    background-color: var(--medblue);
+    color: var(--ltyellow);
+    font-weight: bolder;
+  }
+  
+  .slider2-f .option:last-child {
+    background-color: transparent;
+    color: gray;
+    font-weight: lighter;
+  }
+  
+  .slider2:not(.slider2-f) .option:first-child {
+    background-color: transparent;
+    color: gray;
+    font-weight: lighter;
+  }
+  
+  .slider2:not(.slider2-f) .option:last-child {
+    background-color: var(--medblue);
+    color: var(--ltyellow);
+    font-weight: bolder;
+  }
+  
+  .option {
+    flex: 1;
+    text-align: center;
+    padding: 2px 0;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  /* Text input */
+  form {
+    padding: 5px 20px;
+    width: 90%; /* Fixed width */
+  }
+
+  .form-group {
+    display: flex;
+    align-items: center; /* Center aligns items vertically */
+    margin-bottom: 30px; /* Space between form fields */
+  }
+
+  .fixed-label {
+    width: 100px;
+    font-size: 1.0rem;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  /* Country Dropdown */
 
   .country-selector {
     display: flex;
@@ -394,6 +388,43 @@
     border-bottom: 2px solid var(--dkblue); /* Only bottom border */
     font-size: 1.0rem;
   }
+
+  /* Days of week selector */
+  .checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    margin-left: 25px;
+    }
+
+  .custom-checkbox {
+    appearance: none; /* Remove default checkbox styling */
+    width: 15px;
+    height: 15px;
+    border: 1px solid var(--dkblue);
+    border-radius: 0px;
+    position: relative;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s;
+  }
+
+  .custom-checkbox:checked {
+    background-color: var(--medblue); /* Change background color when checked */
+  }
+
+  .checkbox-label {
+    font-size: 1rem;
+    color: var(--dkblue);
+  }
+  
+  /* For JWT token, not currently used */
+  textarea {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+   
 
   
   </style>
