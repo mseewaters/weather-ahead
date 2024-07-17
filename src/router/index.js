@@ -9,6 +9,7 @@ import dataPrivacy from '@/legal/dataPrivacy.vue'
 import termsConditions from '@/legal/termsConditions.vue'
 import { isTokenValid } from '@/utils/authService'
 import ToggleTest from '@/customize/toggleTest.vue'
+import ToggleFirst from '@/customize/toggleFirst.vue'
 
 const routes = [
   {
@@ -59,6 +60,11 @@ const routes = [
     path: '/toggle',
     name: 'toggle',
     component: ToggleTest
+  },
+  {
+    path: '/togglefirst',
+    name: 'togglefirst',
+    component: ToggleFirst
   }
 ]
 
