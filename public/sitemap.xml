@@ -1,16 +1,59 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
+﻿<?xml version="1.0" encoding="UTF-8"?>
+		<!--	created with www.mysitemapgenerator.com	-->
+		<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-  <loc>https://www.weather-ahead.com/</loc>
-  <lastmod>2024-07-17T01:23:26+00:00</lastmod>
+	<loc>https://www.weather-ahead.com/</loc>
+	<lastmod>2024-08-02T21:31:49+01:00</lastmod>
+	<priority>0.8</priority>
 </url>
-
-
+<url>
+	<loc>https://www.weather-ahead.com/data</loc>
+	<lastmod>2024-08-02T21:31:49+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://www.weather-ahead.com/terms</loc>
+	<lastmod>2024-08-02T21:31:49+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://www.weather-ahead.com/signin</loc>
+	<lastmod>2024-08-02T21:31:49+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://www.weather-ahead.com/register</loc>
+	<lastmod>2024-08-02T21:31:49+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://www.weather-ahead.com/verify</loc>
+	<lastmod>2024-08-02T21:31:49+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://www.weather-ahead.com/forgot</loc>
+	<lastmod>2024-08-02T21:31:49+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://www.weather-ahead.com/profile</loc>
+	<lastmod>2024-08-02T21:31:49+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://www.weather-ahead.com/toggle</loc>
+	<lastmod>2024-08-02T21:31:49+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://www.weather-ahead.com/togglefirst</loc>
+	<lastmod>2024-08-02T21:31:49+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://www.weather-ahead.com/toggleclaude</loc>
+	<lastmod>2024-08-02T21:31:49+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
 </urlset>
