@@ -8,9 +8,7 @@ import ForgotPassword from '@/home/ForgotPassword.vue'
 import dataPrivacy from '@/legal/dataPrivacy.vue'
 import termsConditions from '@/legal/termsConditions.vue'
 import { isTokenValid } from '@/utils/authService'
-import ToggleTest from '@/customize/toggleTest.vue'
-import ToggleFirst from '@/customize/toggleFirst.vue'
-import ToggleClaude from '@/customize/toggleClaude.vue'
+
 
 const routes = [
   {
@@ -56,21 +54,6 @@ const routes = [
     path: '/terms',
     name: 'terms',
     component: termsConditions
-  },
-  {
-    path: '/toggle',
-    name: 'toggle',
-    component: ToggleTest
-  },
-  {
-    path: '/togglefirst',
-    name: 'togglefirst',
-    component: ToggleFirst
-  },
-  {
-    path: '/toggleclaude',
-    name: 'toggleclaude',
-    component: ToggleClaude
   }
 ]
 
