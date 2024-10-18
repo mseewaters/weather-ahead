@@ -80,7 +80,7 @@ main {
 }
 
 header {
-  background-color: var(--medblue2);
+  background-color: var(--dkgreen);
   width: 100%;
   height: var(--fixedheight);
   color: var(--ltyellow);
