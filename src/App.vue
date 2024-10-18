@@ -60,7 +60,6 @@ const authPath = computed(() => {
 
 </script>
 
-
 <style>
 
 html, body {
