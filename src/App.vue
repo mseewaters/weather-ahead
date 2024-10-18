@@ -23,7 +23,7 @@
   </main>
   <footer>
     <ul class="footer-list">
-        Weather Ahead! will never sell or share your data. TBH We don't even know how.   
+        Weather Ahead! will never sell or share your data. We don't even know how.   
         <li> 
           <router-link to="data" class="footer-link">Data Privacy</router-link>
           <router-link to="terms" class="footer-link">Terms and Conditions</router-link>
@@ -60,6 +60,7 @@ const authPath = computed(() => {
 
 </script>
 
+
 <style>
 
 html, body {
@@ -79,7 +80,7 @@ main {
 }
 
 header {
-  background-color: var(--dkgreen);
+  background-color: var(--medblue2);
   width: 100%;
   height: var(--fixedheight);
   color: var(--ltyellow);
